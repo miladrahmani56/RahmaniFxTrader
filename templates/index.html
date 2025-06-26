@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rahmani FX Trader</title>
+</head>
+<body>
+    <h1>Bitcoin Price</h1>
+    <p id="price">Loading...</p>
+
+    <script>
+        async function fetchPrice() {
+            const res = await fetch('/price');
+            const data = await res.json();
+            if (data.bitcoin) {
+                document.getElementById('price').innerText = `$${data.bitcoin.usd}`;
+            } else {
+                document.getElementById('price').innerText = 'Error loading price';
+            }
+        }
+        fetchPrice();
+        setInterval(fetchPrice, 10000); // Refresh every 10 seconds
+    </script>
+</body>
+</html>
